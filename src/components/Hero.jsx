@@ -97,6 +97,8 @@ export default function Hero() {
             loop
             muted
             playsInline
+            preload="auto"
+            decoding="async"
             onCanPlay={() => setIsVideoLoaded(true)}
             className="w-full h-full object-contain md:object-cover z-0"
           />
@@ -340,10 +342,6 @@ export default function Hero() {
           <div className="lg:col-span-6 order-2 lg:order-1 relative w-full flex justify-center lg:justify-start reveal-hero reveal-delay-300">
             <div 
               className="w-full max-w-[600px] select-none relative group lg:-translate-x-4 mix-blend-multiply"
-              style={{
-                maskImage: "radial-gradient(ellipse at center, black 55%, transparent 88%)",
-                WebkitMaskImage: "radial-gradient(ellipse at center, black 55%, transparent 88%)",
-              }}
             >
               <video
                 ref={videoRef2}
@@ -352,7 +350,16 @@ export default function Hero() {
                 loop
                 muted
                 playsInline
-                className="w-full h-auto object-cover filter contrast-[1.18] brightness-[1.03]"
+                preload="auto"
+                decoding="async"
+                className="w-full h-auto object-cover"
+              />
+              {/* High-performance fake mask overlay (replaces expensive CSS mask-image) */}
+              <div 
+                className="absolute inset-0 pointer-events-none" 
+                style={{
+                  background: "radial-gradient(ellipse at center, transparent 55%, white 88%)"
+                }}
               />
             </div>
           </div>

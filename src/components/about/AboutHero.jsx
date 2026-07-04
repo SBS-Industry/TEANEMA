@@ -41,6 +41,8 @@ export default function AboutHero() {
             muted 
             loop 
             playsInline
+            preload="auto"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover md:scale-[1.15] opacity-100 md:opacity-80"
           >
             <source src="/about_bg2.mp4" type="video/mp4" />
