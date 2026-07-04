@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 import TextPressure from "./TextPressure";
+import TeanemaLogo from "./TeanemaLogo";
 
 export default function Hero() {
   const handleScrollTo = (e, targetId) => {
@@ -18,7 +19,32 @@ export default function Hero() {
     }
   };
 
+  const videoRef1 = useRef(null);
+  const videoRef2 = useRef(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  // useLayoutEffect runs synchronously before paint on the client,
+  // preventing the 1-frame preloader flash when routing back to the homepage.
+  useLayoutEffect(() => {
+    if (sessionStorage.getItem('hasSeenPreloader')) {
+      setShowPreloader(false);
+      setIsVideoLoaded(true);
+    } else {
+      sessionStorage.setItem('hasSeenPreloader', 'true');
+      // Fallback just in case video takes too long or event doesn't fire
+      const timer = setTimeout(() => {
+        setIsVideoLoaded(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
   useEffect(() => {
+    // Force videos to play (fixes React hydration autoplay bugs on some browsers)
+    if (videoRef1.current) videoRef1.current.play().catch(e => console.log("Video autoplay blocked", e));
+    if (videoRef2.current) videoRef2.current.play().catch(e => console.log("Video autoplay blocked", e));
+
     // Scroll reveal observer for the slogan content section
     const reveals = document.querySelectorAll(".reveal-hero");
     const observer = new IntersectionObserver(
@@ -38,26 +64,82 @@ export default function Hero() {
 
   return (
     <>
+      {/* Preloader */}
+      {showPreloader && (
+        <div 
+          className={`fixed inset-0 z-[9999] bg-[#060810] flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out ${
+            isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
+          }`}
+        >
+          <TeanemaLogo className="h-10 w-auto mb-6 opacity-80" showBeam={false} animated={true} walk="loop" />
+          <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-full bg-[#F27224] animate-[loading-bar_1.5s_ease-in-out_infinite]" />
+          </div>
+          <style>{`
+            @keyframes loading-bar {
+              0% { width: 0%; transform: translateX(-100%); }
+              50% { width: 70%; transform: translateX(30%); }
+              100% { width: 100%; transform: translateX(100%); }
+            }
+          `}</style>
+        </div>
+      )}
+
       {/* 1. Full-screen Video Hero */}
-      <section className="relative min-h-[100dvh] w-full overflow-hidden flex items-center bg-[#060810]">
+      <section className="relative w-full min-h-[100dvh] flex flex-col md:block overflow-hidden bg-[#060810] pt-[70px] md:pt-0">
 
-        {/* Background Video */}
-        <video
-          src="/DIGI.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-contain md:object-cover z-0"
-        />
-        {/* Soft dark overlay for contrast */}
-        <div className="absolute inset-0 bg-black/10 z-0 pointer-events-none" />
+        {/* Video Container */}
+        <div className="relative w-full aspect-video md:absolute md:inset-0 md:h-full md:w-full z-0 flex items-center justify-center bg-[#060810]">
+          <video
+            ref={videoRef1}
+            src="/DIGI.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            decoding="async"
+            onCanPlay={() => setIsVideoLoaded(true)}
+            className="w-full h-full object-contain md:object-cover z-0"
+          />
+          {/* Soft dark overlay for contrast (Desktop only) */}
+          <div className="hidden md:block absolute inset-0 bg-black/10 z-0 pointer-events-none" />
+        </div>
 
-        {/* Scroll indicator */}
+        {/* Mobile Velocity-Style Text Block */}
+        <div className="md:hidden flex-1 relative z-10 flex flex-col items-start justify-center px-8 w-full bg-[#060810] py-8">
+          <h2 className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-slate-400 mb-2">
+            Dare to be different?
+          </h2>
+          <h1 className="text-4xl font-extrabold font-display tracking-tight text-[#F27224] mb-8">
+            MEET TEANEMA
+          </h1>
+          
+          <h3 className="text-[22px] font-bold text-white mb-1 leading-tight">
+            A 360° Result-Oriented
+          </h3>
+          <h3 className="text-[22px] font-bold text-[#0062BE] mb-8 leading-tight">
+            Digital Marketing Agency
+          </h3>
+          
+          <p className="text-sm text-slate-400 font-medium mb-10 leading-relaxed max-w-[280px]">
+            At TEANEMA, we promise results. Our exceptional success rate comes from our tested and proven strategies.
+          </p>
+          
+          <a
+            href="#intro-content"
+            onClick={(e) => handleScrollTo(e, "#intro-content")}
+            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F27224] to-[#0062BE] text-white font-bold text-sm shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+          >
+            More About Us
+          </a>
+        </div>
+
+        {/* Scroll indicator (Desktop Only) */}
         <a
           href="#intro-content"
           onClick={(e) => handleScrollTo(e, "#intro-content")}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer text-white select-none"
+          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 group cursor-pointer text-white select-none"
         >
           <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-40 group-hover:opacity-70 transition-opacity">Scroll to Explore</span>
           <div className="w-6 h-10 rounded-full border-2 border-white/25 flex items-start justify-center p-1 group-hover:border-white/50 transition-colors">
@@ -77,7 +159,7 @@ export default function Hero() {
           .reveal-hero {
             opacity: 0;
             transform: translateY(32px) scale(0.98);
-            transition: all 850ms cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
             will-change: transform, opacity;
           }
           .reveal-hero.active { opacity: 1; transform: translateY(0) scale(1); }
@@ -260,18 +342,24 @@ export default function Hero() {
           <div className="lg:col-span-6 order-2 lg:order-1 relative w-full flex justify-center lg:justify-start reveal-hero reveal-delay-300">
             <div 
               className="w-full max-w-[600px] select-none relative group lg:-translate-x-4 mix-blend-multiply"
-              style={{
-                maskImage: "radial-gradient(ellipse at center, black 55%, transparent 88%)",
-                WebkitMaskImage: "radial-gradient(ellipse at center, black 55%, transparent 88%)",
-              }}
             >
               <video
+                ref={videoRef2}
                 src="/create_animation.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-auto object-cover filter contrast-[1.18] brightness-[1.03]"
+                preload="auto"
+                decoding="async"
+                className="w-full h-auto object-cover"
+              />
+              {/* High-performance fake mask overlay (replaces expensive CSS mask-image) */}
+              <div 
+                className="absolute inset-0 pointer-events-none" 
+                style={{
+                  background: "radial-gradient(ellipse at center, transparent 55%, white 88%)"
+                }}
               />
             </div>
           </div>
