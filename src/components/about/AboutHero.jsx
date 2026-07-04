@@ -1,13 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { VscSearch, VscMegaphone, VscCode, VscHeart } from "react-icons/vsc";
 
 export default function AboutHero() {
   const [isMounted, setIsMounted] = useState(false);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     setIsMounted(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(e => console.log("Video autoplay blocked", e));
+    }
   }, []);
 
   const handleScrollToCTA = (e) => {
@@ -30,6 +34,7 @@ export default function AboutHero() {
       {/* Video Background (Retained as requested) */}
       {isMounted && (
         <video 
+          ref={videoRef}
           autoPlay 
           muted 
           loop 

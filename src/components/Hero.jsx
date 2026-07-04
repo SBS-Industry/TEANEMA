@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 import TextPressure from "./TextPressure";
 
@@ -18,7 +18,14 @@ export default function Hero() {
     }
   };
 
+  const videoRef1 = useRef(null);
+  const videoRef2 = useRef(null);
+
   useEffect(() => {
+    // Force videos to play (fixes React hydration autoplay bugs on some browsers)
+    if (videoRef1.current) videoRef1.current.play().catch(e => console.log("Video autoplay blocked", e));
+    if (videoRef2.current) videoRef2.current.play().catch(e => console.log("Video autoplay blocked", e));
+
     // Scroll reveal observer for the slogan content section
     const reveals = document.querySelectorAll(".reveal-hero");
     const observer = new IntersectionObserver(
@@ -43,6 +50,7 @@ export default function Hero() {
 
         {/* Background Video */}
         <video
+          ref={videoRef1}
           src="/DIGI.mp4"
           autoPlay
           loop
@@ -266,6 +274,7 @@ export default function Hero() {
               }}
             >
               <video
+                ref={videoRef2}
                 src="/create_animation.mp4"
                 autoPlay
                 loop
