@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 import TextPressure from "./TextPressure";
 import TeanemaLogo from "./TeanemaLogo";
@@ -22,13 +22,13 @@ export default function Hero() {
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
-  useEffect(() => {
-    setIsMounted(true);
+  // useLayoutEffect runs synchronously before paint on the client,
+  // preventing the 1-frame preloader flash when routing back to the homepage.
+  useLayoutEffect(() => {
     if (sessionStorage.getItem('hasSeenPreloader')) {
-      setIsFirstVisit(false);
+      setShowPreloader(false);
       setIsVideoLoaded(true);
     } else {
       sessionStorage.setItem('hasSeenPreloader', 'true');
@@ -65,7 +65,7 @@ export default function Hero() {
   return (
     <>
       {/* Preloader */}
-      {isMounted && isFirstVisit && (
+      {showPreloader && (
         <div 
           className={`fixed inset-0 z-[9999] bg-[#060810] flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out ${
             isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
