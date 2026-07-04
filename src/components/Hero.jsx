@@ -75,27 +75,58 @@ export default function Hero() {
       </div>
 
       {/* 1. Full-screen Video Hero */}
-      <section className="relative min-h-[100dvh] w-full overflow-hidden flex items-center bg-[#060810]">
+      <section className="relative w-full min-h-[100dvh] flex flex-col md:block overflow-hidden bg-black pt-[70px] md:pt-0">
 
-        {/* Background Video */}
-        <video
-          ref={videoRef1}
-          src="/DIGI.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          onCanPlay={() => setIsVideoLoaded(true)}
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        />
-        {/* Soft dark overlay for contrast */}
-        <div className="absolute inset-0 bg-black/10 z-0 pointer-events-none" />
+        {/* Video Container */}
+        <div className="relative w-full aspect-video md:absolute md:inset-0 md:h-full md:w-full z-0 flex items-center justify-center bg-black">
+          <video
+            ref={videoRef1}
+            src="/DIGI.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            onCanPlay={() => setIsVideoLoaded(true)}
+            className="w-full h-full object-contain md:object-cover z-0"
+          />
+          {/* Soft dark overlay for contrast (Desktop only) */}
+          <div className="hidden md:block absolute inset-0 bg-black/10 z-0 pointer-events-none" />
+        </div>
 
-        {/* Scroll indicator */}
+        {/* Mobile Velocity-Style Text Block */}
+        <div className="md:hidden flex-1 relative z-10 flex flex-col items-start justify-center px-8 w-full bg-black mt-4">
+          <h2 className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-white mb-2">
+            Dare to be different?
+          </h2>
+          <h1 className="text-4xl font-extrabold font-display tracking-tight text-[#E62B1E] mb-8">
+            MEET TEANEMA
+          </h1>
+          
+          <h3 className="text-[22px] font-bold text-white mb-1 leading-tight">
+            A 360° Result-Oriented
+          </h3>
+          <h3 className="text-[22px] font-bold text-slate-500 mb-8 leading-tight">
+            Digital Marketing Agency
+          </h3>
+          
+          <p className="text-sm text-slate-400 font-medium mb-10 leading-relaxed max-w-[280px]">
+            At TEANEMA, we promise results. Our exceptional success rate comes from our tested and proven strategies.
+          </p>
+          
+          <a
+            href="#intro-content"
+            onClick={(e) => handleScrollTo(e, "#intro-content")}
+            className="px-7 py-3.5 rounded-full bg-white text-black font-bold text-sm hover:bg-slate-200 transition-colors"
+          >
+            More About Us
+          </a>
+        </div>
+
+        {/* Scroll indicator (Desktop Only) */}
         <a
           href="#intro-content"
           onClick={(e) => handleScrollTo(e, "#intro-content")}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer text-white select-none"
+          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 group cursor-pointer text-white select-none"
         >
           <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-40 group-hover:opacity-70 transition-opacity">Scroll to Explore</span>
           <div className="w-6 h-10 rounded-full border-2 border-white/25 flex items-start justify-center p-1 group-hover:border-white/50 transition-colors">
