@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ScrollStack, { ScrollStackItem } from "./ScrollStack";
 import TextPressure from "./TextPressure";
+import TeanemaLogo from "./TeanemaLogo";
 
 export default function Hero() {
   const handleScrollTo = (e, targetId) => {
@@ -20,6 +21,15 @@ export default function Hero() {
 
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  useEffect(() => {
+    // Fallback just in case video takes too long or event doesn't fire
+    const timer = setTimeout(() => {
+      setIsVideoLoaded(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     // Force videos to play (fixes React hydration autoplay bugs on some browsers)
@@ -45,6 +55,25 @@ export default function Hero() {
 
   return (
     <>
+      {/* Preloader */}
+      <div 
+        className={`fixed inset-0 z-[9999] bg-[#060810] flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out ${
+          isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
+        }`}
+      >
+        <TeanemaLogo className="h-10 w-auto mb-6 opacity-80" showBeam={false} animated={true} walk="loop" />
+        <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+          <div className="h-full bg-[#F27224] animate-[loading-bar_1.5s_ease-in-out_infinite]" />
+        </div>
+        <style>{`
+          @keyframes loading-bar {
+            0% { width: 0%; transform: translateX(-100%); }
+            50% { width: 70%; transform: translateX(30%); }
+            100% { width: 100%; transform: translateX(100%); }
+          }
+        `}</style>
+      </div>
+
       {/* 1. Full-screen Video Hero */}
       <section className="relative min-h-[100dvh] w-full overflow-hidden flex items-center bg-[#060810]">
 
@@ -56,7 +85,8 @@ export default function Hero() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-contain md:object-cover z-0"
+          onCanPlay={() => setIsVideoLoaded(true)}
+          className="absolute inset-0 w-full h-full object-cover z-0"
         />
         {/* Soft dark overlay for contrast */}
         <div className="absolute inset-0 bg-black/10 z-0 pointer-events-none" />
