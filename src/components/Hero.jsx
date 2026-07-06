@@ -352,7 +352,7 @@ export default function Hero() {
                 playsInline
                 preload="auto"
                 decoding="async"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover filter contrast-[1.15] brightness-[1.05]"
               />
               {/* High-performance fake mask overlay (replaces expensive CSS mask-image) */}
               <div 
