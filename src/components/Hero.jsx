@@ -86,10 +86,10 @@ export default function Hero() {
       )}
 
       {/* 1. Full-screen Video Hero */}
-      <section className="relative w-full min-h-[100dvh] flex flex-col md:flex-row overflow-hidden bg-[#060810] pt-[70px] md:pt-0">
+      <section className="relative w-full min-h-[100dvh] flex flex-col lg:flex-row overflow-hidden bg-[#060810] pt-[70px] lg:pt-0">
 
         {/* Text Block (Left on Desktop, Bottom on Mobile) */}
-        <div className="order-2 md:order-1 flex-1 md:w-1/2 relative z-10 flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 w-full bg-[#060810] py-12 md:py-0">
+        <div className="order-2 lg:order-1 flex-1 lg:w-1/2 relative z-10 flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 w-full bg-[#060810] py-12 lg:py-0">
           <h2 className="text-[11px] md:text-sm font-extrabold tracking-[0.2em] uppercase text-slate-400 mb-2 md:mb-4">
             Dare to be different?
           </h2>
@@ -115,7 +115,7 @@ export default function Hero() {
         </div>
 
         {/* Video Container (Right on Desktop, Top on Mobile) */}
-        <div className="order-1 md:order-2 relative w-full md:w-1/2 aspect-video md:aspect-auto md:h-full z-0 flex items-center justify-center bg-[#060810]">
+        <div className="order-1 lg:order-2 relative w-full lg:w-1/2 aspect-video lg:aspect-auto lg:h-full z-0 flex items-center justify-center bg-[#060810]">
           <video
             ref={videoRef1}
             src="/DIGI.mp4"
@@ -126,7 +126,7 @@ export default function Hero() {
             preload="auto"
             decoding="async"
             onCanPlay={() => setIsVideoLoaded(true)}
-            className="w-full h-full object-contain z-0 px-4 md:px-0"
+            className="w-full h-full object-contain z-0 px-4 lg:px-0"
           />
         </div>
 
@@ -234,10 +234,10 @@ export default function Hero() {
         <div className="absolute bottom-10 left-10 w-[380px] h-[380px] rounded-full blur-[110px] pointer-events-none z-0 blob-2" style={{ background: "radial-gradient(circle, rgba(242,114,36,0.06) 0%, transparent 70%)" }} />
         {/* Grid texture removed per user request */}
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20 w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Hero Right Content — ScrollStack approach */}
-          <div className="md:col-span-6 order-1 md:order-2 flex flex-col relative h-[500px] w-full reveal-hero reveal-delay-100 mt-10 md:mt-0">
+          <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col relative h-[500px] w-full reveal-hero reveal-delay-100 mt-10 lg:mt-0">
             <style>{`
               .hero-scroll-stack .scroll-stack-inner {
                 padding: 1rem 0 !important;
@@ -334,7 +334,7 @@ export default function Hero() {
           </div>
 
           {/* Hero Left Visual: Logo/Video — now ORDER 1 on desktop */}
-          <div className="md:col-span-6 order-2 md:order-1 relative w-full flex justify-center md:justify-start reveal-hero reveal-delay-300">
+          <div className="lg:col-span-6 order-2 lg:order-1 relative w-full flex justify-center lg:justify-start reveal-hero reveal-delay-300">
             <div 
               className="w-full max-w-[600px] select-none relative group lg:-translate-x-4 mix-blend-multiply"
             >
