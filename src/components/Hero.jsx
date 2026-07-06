@@ -86,10 +86,36 @@ export default function Hero() {
       )}
 
       {/* 1. Full-screen Video Hero */}
-      <section className="relative w-full min-h-[100dvh] flex flex-col md:block overflow-hidden bg-[#060810] pt-[70px] md:pt-0">
+      <section className="relative w-full min-h-[100dvh] flex flex-col md:flex-row overflow-hidden bg-[#060810] pt-[70px] md:pt-0">
 
-        {/* Video Container */}
-        <div className="relative w-full aspect-video md:absolute md:inset-0 md:h-full md:w-full z-0 flex items-center justify-center bg-[#060810]">
+        {/* Text Block (Left on Desktop, Bottom on Mobile) */}
+        <div className="order-2 md:order-1 flex-1 md:w-1/2 relative z-10 flex flex-col items-start justify-center px-8 md:px-16 lg:px-24 w-full bg-[#060810] py-12 md:py-0">
+          <h2 className="text-[11px] md:text-sm font-extrabold tracking-[0.2em] uppercase text-slate-400 mb-2 md:mb-4">
+            Dare to be different?
+          </h2>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold font-display tracking-tight text-[#F27224] mb-4 md:mb-8">
+            MEET TEANEMA
+          </h1>
+          <h3 className="text-[22px] md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-1 leading-tight">
+            A 360° Result-Oriented
+          </h3>
+          <h3 className="text-[22px] md:text-3xl lg:text-4xl xl:text-5xl font-bold text-[#0062BE] mb-6 md:mb-8 leading-tight">
+            Digital Marketing Agency
+          </h3>
+          <p className="text-sm md:text-base lg:text-lg text-slate-400 font-medium mb-8 md:mb-12 leading-relaxed max-w-[280px] md:max-w-md">
+            At TEANEMA, we promise results. Our exceptional success rate comes from our tested and proven strategies.
+          </p>
+          <a
+            href="#intro-content"
+            onClick={(e) => handleScrollTo(e, "#intro-content")}
+            className="px-8 md:px-10 py-3.5 md:py-4 rounded-full bg-gradient-to-r from-[#F27224] to-[#0062BE] text-white font-bold text-sm md:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+          >
+            More About Us
+          </a>
+        </div>
+
+        {/* Video Container (Right on Desktop, Top on Mobile) */}
+        <div className="order-1 md:order-2 relative w-full md:w-1/2 aspect-video md:aspect-auto md:h-full z-0 flex items-center justify-center bg-[#060810]">
           <video
             ref={videoRef1}
             src="/DIGI.mp4"
@@ -100,46 +126,15 @@ export default function Hero() {
             preload="auto"
             decoding="async"
             onCanPlay={() => setIsVideoLoaded(true)}
-            className="w-full h-full object-contain md:object-cover z-0"
+            className="w-full h-full object-contain z-0 px-4 md:px-0"
           />
-          {/* Soft dark overlay for contrast (Desktop only) */}
-          <div className="hidden md:block absolute inset-0 bg-black/10 z-0 pointer-events-none" />
-        </div>
-
-        {/* Mobile Velocity-Style Text Block */}
-        <div className="md:hidden flex-1 relative z-10 flex flex-col items-start justify-center px-8 w-full bg-[#060810] py-8">
-          <h2 className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-slate-400 mb-2">
-            Dare to be different?
-          </h2>
-          <h1 className="text-4xl font-extrabold font-display tracking-tight text-[#F27224] mb-8">
-            MEET TEANEMA
-          </h1>
-          
-          <h3 className="text-[22px] font-bold text-white mb-1 leading-tight">
-            A 360° Result-Oriented
-          </h3>
-          <h3 className="text-[22px] font-bold text-[#0062BE] mb-8 leading-tight">
-            Digital Marketing Agency
-          </h3>
-          
-          <p className="text-sm text-slate-400 font-medium mb-10 leading-relaxed max-w-[280px]">
-            At TEANEMA, we promise results. Our exceptional success rate comes from our tested and proven strategies.
-          </p>
-          
-          <a
-            href="#intro-content"
-            onClick={(e) => handleScrollTo(e, "#intro-content")}
-            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F27224] to-[#0062BE] text-white font-bold text-sm shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
-          >
-            More About Us
-          </a>
         </div>
 
         {/* Scroll indicator (Desktop Only) */}
         <a
           href="#intro-content"
           onClick={(e) => handleScrollTo(e, "#intro-content")}
-          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 group cursor-pointer text-white select-none"
+          className="hidden md:flex absolute bottom-8 left-[25%] -translate-x-1/2 z-20 flex-col items-center gap-2 group cursor-pointer text-white select-none"
         >
           <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-40 group-hover:opacity-70 transition-opacity">Scroll to Explore</span>
           <div className="w-6 h-10 rounded-full border-2 border-white/25 flex items-start justify-center p-1 group-hover:border-white/50 transition-colors">
@@ -239,10 +234,10 @@ export default function Hero() {
         <div className="absolute bottom-10 left-10 w-[380px] h-[380px] rounded-full blur-[110px] pointer-events-none z-0 blob-2" style={{ background: "radial-gradient(circle, rgba(242,114,36,0.06) 0%, transparent 70%)" }} />
         {/* Grid texture removed per user request */}
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-20 w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-center">
           
           {/* Hero Right Content — ScrollStack approach */}
-          <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col relative h-[500px] w-full reveal-hero reveal-delay-100 mt-10 lg:mt-0">
+          <div className="md:col-span-6 order-1 md:order-2 flex flex-col relative h-[500px] w-full reveal-hero reveal-delay-100 mt-10 md:mt-0">
             <style>{`
               .hero-scroll-stack .scroll-stack-inner {
                 padding: 1rem 0 !important;
@@ -339,7 +334,7 @@ export default function Hero() {
           </div>
 
           {/* Hero Left Visual: Logo/Video — now ORDER 1 on desktop */}
-          <div className="lg:col-span-6 order-2 lg:order-1 relative w-full flex justify-center lg:justify-start reveal-hero reveal-delay-300">
+          <div className="md:col-span-6 order-2 md:order-1 relative w-full flex justify-center md:justify-start reveal-hero reveal-delay-300">
             <div 
               className="w-full max-w-[600px] select-none relative group lg:-translate-x-4 mix-blend-multiply"
             >
