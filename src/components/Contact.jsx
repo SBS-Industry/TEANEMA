@@ -136,8 +136,41 @@ export default function Contact() {
           {/* Subtle inner reflection line */}
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
 
-          {/* Left Side: Form */}
-          <div className="flex-1">
+          {/* Left Side: Form and Mission/Vision */}
+          <div className="flex-1 flex flex-col">
+            {/* Mission, Vision & Core Values Section */}
+            <div className="mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold font-display text-[#3E2723] mb-6">
+                Our <span style={{ color: "#F27224" }}>Story & Values</span>
+              </h2>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="text-xl font-bold font-display text-[#0062BE] mb-2">Mission</h3>
+                  <p className="text-slate-600 leading-relaxed font-medium">
+                    "To help brands break out of the noise and find their spotlight through strategic storytelling and cinematic execution."
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-display text-[#10B981] mb-2">Vision</h3>
+                  <p className="text-slate-600 leading-relaxed font-medium">
+                    "To be the creative force behind the world's most unforgettable brands, setting new standards for digital marketing and production."
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-display text-[#F27224] mb-3">Core Values</h3>
+                  <ul className="space-y-3 text-slate-600 font-medium">
+                    <li className="flex gap-3"><span className="text-[#F27224]">•</span> <span><strong>Story-First Approach:</strong> Every campaign starts with a meaningful narrative.</span></li>
+                    <li className="flex gap-3"><span className="text-[#0062BE]">•</span> <span><strong>Quality Without Compromise:</strong> We treat every project like a masterpiece.</span></li>
+                    <li className="flex gap-3"><span className="text-[#10B981]">•</span> <span><strong>Strategy That Performs:</strong> Beauty meets logic to deliver measurable results.</span></li>
+                    <li className="flex gap-3"><span className="text-[#F27224]">•</span> <span><strong>Unapologetic Creativity:</strong> We dare to be different, so our clients can stand out.</span></li>
+                    <li className="flex gap-3"><span className="text-[#0062BE]">•</span> <span><strong>Transparent Collaboration:</strong> Open communication and honest partnerships from start to finish.</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <hr className="border-slate-200 my-8" />
+
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display text-[#3E2723] tracking-tight leading-tight mb-4">
               Ready to <span style={{ color: "#F27224" }}>scale?</span>
             </h2>
@@ -157,9 +190,8 @@ export default function Contact() {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     className="w-full bg-transparent border-b-2 border-slate-300/60 focus:border-[#F27224] py-3 text-lg outline-none text-[#3E2723] transition-colors peer"
-                    placeholder=" "
                   />
-                  <label className="absolute left-0 top-3 text-slate-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-slate-400 peer-[:not(:placeholder-shown)]:font-bold">
+                  <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${formData.fullName ? '-top-5 text-xs text-[#F27224] font-bold' : 'top-3 text-lg text-slate-400'} peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold`}>
                     Full Name
                   </label>
                 </div>
@@ -173,9 +205,8 @@ export default function Contact() {
                     value={formData.companyName}
                     onChange={handleInputChange}
                     className="w-full bg-transparent border-b-2 border-slate-300/60 focus:border-[#F27224] py-3 text-lg outline-none text-[#3E2723] transition-colors peer"
-                    placeholder=" "
                   />
-                  <label className="absolute left-0 top-3 text-slate-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-slate-400 peer-[:not(:placeholder-shown)]:font-bold">
+                  <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${formData.companyName ? '-top-5 text-xs text-[#F27224] font-bold' : 'top-3 text-lg text-slate-400'} peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold`}>
                     Company Name
                   </label>
                 </div>
@@ -191,9 +222,8 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full bg-transparent border-b-2 border-slate-300/60 focus:border-[#F27224] py-3 text-lg outline-none text-[#3E2723] transition-colors peer"
-                    placeholder=" "
                   />
-                  <label className="absolute left-0 top-3 text-slate-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-slate-400 peer-[:not(:placeholder-shown)]:font-bold">
+                  <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${formData.email ? '-top-5 text-xs text-[#F27224] font-bold' : 'top-3 text-lg text-slate-400'} peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold`}>
                     Email Address
                   </label>
                 </div>
@@ -210,9 +240,8 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleInputChange}
                     className="w-full bg-transparent border-b-2 border-slate-300/60 focus:border-[#F27224] py-3 text-lg outline-none text-[#3E2723] transition-colors peer"
-                    placeholder=" "
                   />
-                  <label className="absolute left-0 top-3 text-slate-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-slate-400 peer-[:not(:placeholder-shown)]:font-bold">
+                  <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${formData.phone ? '-top-5 text-xs text-[#F27224] font-bold' : 'top-3 text-lg text-slate-400'} peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold`}>
                     Phone Number
                   </label>
                 </div>
@@ -227,9 +256,8 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleInputChange}
                   className="w-full bg-transparent border-b-2 border-slate-300/60 focus:border-[#F27224] py-3 text-lg outline-none text-[#3E2723] transition-colors peer resize-none"
-                  placeholder=" "
                 />
-                <label className="absolute left-0 top-3 text-slate-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold peer-[:not(:placeholder-shown)]:-top-5 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-slate-400 peer-[:not(:placeholder-shown)]:font-bold">
+                <label className={`absolute left-0 transition-all duration-300 pointer-events-none ${formData.message ? '-top-5 text-xs text-[#F27224] font-bold' : 'top-3 text-lg text-slate-400'} peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[#F27224] peer-focus:font-bold`}>
                   What are your goals?
                 </label>
               </div>
@@ -268,7 +296,7 @@ export default function Contact() {
 
           {/* Right Side: Bento Contact Cards */}
           <div className="w-full lg:w-[380px] flex flex-col gap-6 pt-4 lg:pt-0">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Direct Contact</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Drop By for a Cup of Ideas</h3>
             
             {/* Bento Card 1: Email */}
             <a href="mailto:sbsfin27@gmail.com" className="bg-white/60 hover:bg-white transition-colors duration-300 backdrop-blur-md rounded-3xl p-6 border border-white shadow-sm flex items-start gap-5 group">
@@ -311,9 +339,40 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-[#3E2723] font-bold font-display text-xl mb-1">Our Office</h4>
-                <p className="text-slate-500 text-sm leading-relaxed">1003, Span Trade Centre, Paldi<br/>Ahmedabad, Gujarat, India</p>
+                <p className="text-slate-500 text-sm leading-relaxed">1003, Span Trade Centre, Paldi<br/>Ahmedabad, Gujarat, India<br/><span className="mt-1 block text-[#10B981] font-bold text-xs uppercase tracking-wide">9:00 AM - 6:00 PM</span></p>
               </div>
             </a>
+
+            {/* Bento Card 4: Social Links */}
+            <div className="bg-white/60 hover:bg-white transition-colors duration-300 backdrop-blur-md rounded-3xl p-6 border border-white shadow-sm flex flex-col group">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-4">Follow the Story</h3>
+              <div className="flex gap-4">
+                <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#F27224] hover:text-white transition-all">
+                  <span className="sr-only">Instagram</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#0077b5] hover:text-white transition-all">
+                  <span className="sr-only">LinkedIn</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#1877F2] hover:text-white transition-all">
+                  <span className="sr-only">Facebook</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#FF0000] hover:text-white transition-all">
+                  <span className="sr-only">YouTube</span>
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path fillRule="evenodd" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.015 3.015 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.376.55 9.376.55s7.505 0 9.377-.55a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" clipRule="evenodd" />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
           </div>
 
