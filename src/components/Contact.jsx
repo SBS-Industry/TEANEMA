@@ -255,7 +255,12 @@ export default function Contact() {
             </a>
 
             {/* Bento Card 3: Office */}
-            <div className="bg-white/60 hover:bg-white transition-colors duration-300 backdrop-blur-md rounded-3xl p-6 border border-white shadow-sm flex items-start gap-5 group cursor-default">
+            <a 
+              href="https://maps.google.com/?q=1003,+Span+Trade+Centre,+Paldi,+Ahmedabad,+Gujarat,+India" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="bg-white/60 hover:bg-white transition-colors duration-300 backdrop-blur-md rounded-3xl p-6 border border-white shadow-sm flex items-start gap-5 group cursor-pointer"
+            >
               <div className="w-12 h-12 rounded-2xl bg-[#F27224]/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 <svg className="w-5 h-5 text-[#F27224]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z" />
@@ -266,7 +271,7 @@ export default function Contact() {
                 <h4 className="text-[#3E2723] font-bold font-display text-xl mb-1">Our Office</h4>
                 <p className="text-slate-500 text-sm leading-relaxed">1003, Span Trade Centre, Paldi<br/>Ahmedabad, Gujarat, India</p>
               </div>
-            </div>
+            </a>
 
           </div>
 
