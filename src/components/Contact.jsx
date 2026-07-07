@@ -125,6 +125,7 @@ export default function Contact() {
         style={{ background: "radial-gradient(circle, #10B981 0%, transparent 70%)", animationDuration: '12s' }} 
       />
 
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         {/* Story & Values Section */}
         <div 
           className={`mb-20 md:mb-28 transition-all duration-1000 transform ${
