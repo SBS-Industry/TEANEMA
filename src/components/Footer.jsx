@@ -162,7 +162,7 @@ export default function Footer() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-[13px] text-slate-600 hover:text-slate-900 transition-all duration-200 hover:translate-x-1 inline-block font-semibold"
+                    className="text-[13px] text-slate-600 hover:text-[#3E2723] transition-all duration-200 hover:translate-x-1 inline-block font-semibold"
                   >
                     {link.name}
                   </Link>
@@ -178,7 +178,7 @@ export default function Footer() {
                   <Link
                     key={service.name}
                     href={service.href}
-                    className="text-[13px] text-slate-600 hover:text-slate-900 transition-all duration-200 hover:translate-x-1 inline-block font-medium"
+                    className="text-[13px] text-slate-600 hover:text-[#3E2723] transition-all duration-200 hover:translate-x-1 inline-block font-medium"
                   >
                     {service.name}
                   </Link>
@@ -195,7 +195,7 @@ export default function Footer() {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleScrollTo(e, link.href)}
-                    className="text-[13px] text-slate-600 hover:text-slate-900 transition-all duration-200 hover:translate-x-1 inline-block font-semibold"
+                    className="text-[13px] text-slate-600 hover:text-[#3E2723] transition-all duration-200 hover:translate-x-1 inline-block font-semibold"
                   >
                     {link.name}
                   </a>
@@ -207,7 +207,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-8 text-xs text-slate-400">
-          <p>© 2026 TEANEMA. All rights reserved.</p>
+          <p>© 2026 TEANEMA. All rights reserved. | Managed by SBS Quantum</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-slate-700 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-slate-700 transition-colors">Terms of Service</a>

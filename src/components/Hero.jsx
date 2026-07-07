@@ -67,7 +67,7 @@ export default function Hero() {
       {/* Preloader */}
       {showPreloader && (
         <div 
-          className={`fixed inset-0 z-[9999] bg-[#060810] flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out ${
+          className={`fixed inset-0 z-[9999] bg-[#3E2723] flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out ${
             isVideoLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'
           }`}
         >
@@ -86,10 +86,10 @@ export default function Hero() {
       )}
 
       {/* 1. Full-screen Video Hero */}
-      <section className="relative w-full min-h-[100dvh] flex flex-col md:block overflow-hidden bg-[#060810] pt-[70px] md:pt-0">
+      <section className="relative w-full flex flex-col overflow-hidden bg-[#3E2723] pt-[70px]">
 
-        {/* Video Container */}
-        <div className="relative w-full aspect-video md:absolute md:inset-0 md:h-full md:w-full z-0 flex items-center justify-center bg-[#060810]">
+        {/* Video Container (Always on top, full width) */}
+        <div className="relative w-full aspect-video z-0 bg-[#3E2723]">
           <video
             ref={videoRef1}
             src="/DIGI.mp4"
@@ -100,52 +100,32 @@ export default function Hero() {
             preload="auto"
             decoding="async"
             onCanPlay={() => setIsVideoLoaded(true)}
-            className="w-full h-full object-contain md:object-cover z-0"
+            className="w-full h-full object-cover z-0"
           />
-          {/* Soft dark overlay for contrast (Desktop only) */}
-          <div className="hidden md:block absolute inset-0 bg-black/10 z-0 pointer-events-none" />
         </div>
 
-        {/* Mobile Velocity-Style Text Block */}
-        <div className="md:hidden flex-1 relative z-10 flex flex-col items-start justify-center px-8 w-full bg-[#060810] py-8">
-          <h2 className="text-[11px] font-extrabold tracking-[0.2em] uppercase text-slate-400 mb-2">
-            Dare to be different?
+        {/* Text Block (Always centered below the video) */}
+        <div className="relative z-20 flex flex-col items-center justify-center text-center px-8 md:px-16 lg:px-24 w-full bg-[#3E2723] py-16 md:py-24">
+          <h2 className="text-[11px] md:text-sm font-extrabold tracking-[0.2em] uppercase text-slate-400 mb-2 md:mb-4">
+            DARE TO STAND OUT.
           </h2>
-          <h1 className="text-4xl font-extrabold font-display tracking-tight text-[#F27224] mb-8">
-            MEET TEANEMA
+          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold font-display tracking-tight text-[#F27224] mb-4 md:mb-6" style={{ textShadow: '0 4px 40px rgba(242,114,36,0.2)' }}>
+            Meet TeaNema.
           </h1>
-          
-          <h3 className="text-[22px] font-bold text-white mb-1 leading-tight">
-            A 360° Result-Oriented
+          <h3 className="text-[22px] md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 md:mb-8 leading-tight">
+            Where Brands Become <span className="text-[#0062BE]" style={{ textShadow: '0 4px 40px rgba(0,98,190,0.2)' }}>Experiences.</span>
           </h3>
-          <h3 className="text-[22px] font-bold text-[#0062BE] mb-8 leading-tight">
-            Digital Marketing Agency
-          </h3>
-          
-          <p className="text-sm text-slate-400 font-medium mb-10 leading-relaxed max-w-[280px]">
-            At TEANEMA, we promise results. Our exceptional success rate comes from our tested and proven strategies.
+          <p className="text-sm md:text-base lg:text-lg text-slate-400 font-medium mb-10 md:mb-12 leading-relaxed max-w-[280px] md:max-w-2xl">
+            We blend creativity, strategy, and technology to build brands that capture attention, create lasting impact, and deliver measurable business growth across every platform.
           </p>
-          
           <a
             href="#intro-content"
             onClick={(e) => handleScrollTo(e, "#intro-content")}
-            className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F27224] to-[#0062BE] text-white font-bold text-sm shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+            className="px-10 md:px-12 py-4 md:py-4 rounded-full bg-gradient-to-r from-[#F27224] to-[#0062BE] text-white font-bold text-sm md:text-lg shadow-[0_0_20px_rgba(242,114,36,0.2)] hover:shadow-[0_0_40px_rgba(0,98,190,0.5)] hover:scale-105 hover:-translate-y-0.5 transition-all duration-300"
           >
-            More About Us
+            Let's Build Your Brand →
           </a>
         </div>
-
-        {/* Scroll indicator (Desktop Only) */}
-        <a
-          href="#intro-content"
-          onClick={(e) => handleScrollTo(e, "#intro-content")}
-          className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-2 group cursor-pointer text-white select-none"
-        >
-          <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-40 group-hover:opacity-70 transition-opacity">Scroll to Explore</span>
-          <div className="w-6 h-10 rounded-full border-2 border-white/25 flex items-start justify-center p-1 group-hover:border-white/50 transition-colors">
-            <div className="w-1 h-1.5 rounded-full bg-white animate-scroll-dot" />
-          </div>
-        </a>
 
         {/* CSS Keyframes */}
         <style>{`
@@ -281,12 +261,15 @@ export default function Hero() {
             >
               {/* Card 1: Main Headline */}
               <ScrollStackItem itemClassName="hero-stack-card flex flex-col justify-center text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-display tracking-tight text-slate-900 leading-[1.08] mb-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold font-display tracking-tight text-[#3E2723] leading-[1.08] mb-4">
                   Grow Your Brand.
                   <span className="block mt-1" style={{ color: "#0062BE" }}>
                     Dominate Your Market.
                   </span>
                 </h1>
+                <p className="text-lg text-slate-650 font-normal leading-relaxed max-w-md mt-2 font-serif italic text-slate-500">
+                  Every Brand Has a Story. We Make Yours Worth Watching. From the first sip of an idea to the final standing ovation, we create brands people remember.
+                </p>
                 <div className="mt-4 flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#F27224" }} />
@@ -298,26 +281,27 @@ export default function Hero() {
 
               {/* Card 2: Slogan & Subhead */}
               <ScrollStackItem itemClassName="hero-stack-card flex flex-col justify-center text-left">
-                <div className="font-display font-black text-4xl sm:text-5xl text-slate-950 leading-[0.95] tracking-tight mb-5">
+                <div className="font-display font-black text-4xl sm:text-5xl text-[#3E2723] leading-[0.95] tracking-tight mb-3">
                   Making<br />
                   Advertising<br />
-                  Great again!
+                  Great Again
                 </div>
-                <p className="text-lg text-slate-650 font-normal leading-relaxed max-w-md">
-                  We help businesses turn clicks into customers with data-driven SEO, performance marketing, and content strategies that actually move revenue.
+                <h4 className="text-lg font-bold text-[#F27224] mb-2">Brewing Stories. Creating Blockbusters.</h4>
+                <p className="text-base text-slate-650 font-normal leading-relaxed max-w-md">
+                  Every successful brand begins with a simple idea. We brew that idea with strategy, creativity, and cinematic execution until it becomes impossible to ignore.
                 </p>
               </ScrollStackItem>
 
               {/* Card 3: CTAs */}
               <ScrollStackItem itemClassName="hero-stack-card flex flex-col justify-center text-left">
-                <h3 className="text-3xl font-extrabold font-display text-slate-900 mb-6 tracking-tight">Ready to scale?</h3>
+                <h3 className="text-3xl font-extrabold font-display text-[#3E2723] mb-6 tracking-tight">Ready For Your Brand's Next Scene?</h3>
                 <div className="flex flex-col gap-4 w-full sm:w-4/5 max-w-sm">
                   <a
                     href="#contact"
                     onClick={(e) => handleScrollTo(e, "#contact")}
                     className="btn-primary w-full text-center py-4"
                   >
-                    Get Your Free Marketing Audit
+                    Roll Camera
                   </a>
                   <a
                     href="#services"
@@ -352,7 +336,7 @@ export default function Hero() {
                 playsInline
                 preload="auto"
                 decoding="async"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover filter contrast-[1.15] brightness-[1.05]"
               />
               {/* High-performance fake mask overlay (replaces expensive CSS mask-image) */}
               <div 

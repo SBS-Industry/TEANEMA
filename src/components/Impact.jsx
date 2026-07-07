@@ -2,10 +2,36 @@
 
 import { useEffect, useState, useRef } from "react";
 
-function CountUp({ end, duration = 1800, suffix = "", prefix = "", decimals = 0 }) {
+function CountUp({ end, duration = 2000, suffix = "", prefix = "", decimals = 0 }) {
   const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const elementRef = useRef(null);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          if (elementRef.current) {
+            observer.unobserve(elementRef.current);
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      if (elementRef.current) observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
     let startTime = null;
     const startValue = 0;
 
@@ -13,7 +39,6 @@ function CountUp({ end, duration = 1800, suffix = "", prefix = "", decimals = 0 
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       
-      // Easing: easeOutExpo
       const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       const currentValue = startValue + easedProgress * (end - startValue);
       
@@ -27,10 +52,10 @@ function CountUp({ end, duration = 1800, suffix = "", prefix = "", decimals = 0 
     };
 
     requestAnimationFrame(animate);
-  }, [end, duration]);
+  }, [hasStarted, end, duration]);
 
   return (
-    <span className="tabular-nums font-bold font-display text-current">
+    <span ref={elementRef} className="tabular-nums">
       {prefix}
       {decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}
       {suffix}
@@ -39,9 +64,6 @@ function CountUp({ end, duration = 1800, suffix = "", prefix = "", decimals = 0 
 }
 
 export default function Impact() {
-  const [progress, setProgress] = useState(0);
-  const containerRef = useRef(null);
-
   const stats = [
     {
       id: 1,
@@ -49,18 +71,16 @@ export default function Impact() {
       suffix: "+",
       label: "Brands Scaled",
       desc: "From local startups to global companies",
-      colorClass: "text-[#F27224]",
-      colorHex: "#F27224",
+      colorHex: "#F27224", // TEANEMA Orange
     },
     {
       id: 2,
       end: 4.8,
       decimals: 1,
       suffix: "x",
-      label: "Avg. ROAS Delivered",
+      label: "Avg. ROAS",
       desc: "Optimized ad budgets that convert revenue",
-      colorClass: "text-[#0062BE]",
-      colorHex: "#0062BE",
+      colorHex: "#0062BE", // TEANEMA Blue
     },
     {
       id: 3,
@@ -69,114 +89,71 @@ export default function Impact() {
       suffix: "Cr+",
       label: "Ad Spend Managed",
       desc: "Highly controlled, high-return campaigns",
-      colorClass: "text-[#F27224]",
-      colorHex: "#F27224",
+      colorHex: "#F27224", // TEANEMA Orange
     },
     {
       id: 4,
       end: 96,
       suffix: "%",
-      label: "Client Retention Rate",
+      label: "Client Retention",
       desc: "Long-term partnerships built on performance",
-      colorClass: "text-[#0062BE]",
-      colorHex: "#0062BE",
+      colorHex: "#0062BE", // TEANEMA Blue
     },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      
-      const start = windowHeight / 2;
-      const totalDistance = rect.height;
-      const currentDistance = start - rect.top;
-      
-      let newProgress = currentDistance / totalDistance;
-      newProgress = Math.max(0, Math.min(1, newProgress));
-      
-      setProgress(newProgress);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // init
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <section id="impact" className="relative bg-[#060810] py-24 md:py-32 overflow-hidden z-10 border-y border-white/5">
+    <section id="impact" className="relative bg-white py-24 md:py-32 border-y border-slate-100 overflow-hidden">
       
-      {/* Background ambient blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[#0062BE]/10 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#F27224]/10 rounded-full blur-[100px] pointer-events-none" />
+      {/* Very subtle ambient glows in the background */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-slate-50 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-slate-50/80 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Header */}
-      <div className="text-center mb-24 max-w-3xl mx-auto px-6 relative z-20 reveal">
-        <p className="text-[#F27224] text-sm font-bold uppercase tracking-widest mb-3">Our Impact</p>
-        <h2 className="text-4xl md:text-6xl font-bold font-display text-white tracking-tight leading-tight">
-          Numbers That Speak Louder Than Promises.
-        </h2>
-        <p className="mt-6 text-lg text-slate-400 max-w-xl mx-auto">
-          We don't deal in vanity metrics. Every campaign we run is heavily optimized for actual revenue growth and market dominance.
-        </p>
-      </div>
-
-      {/* Timeline */}
-      <div ref={containerRef} className="relative max-w-5xl mx-auto px-6 pb-20 md:pb-32">
-        {/* Base Line */}
-        <div className="absolute left-[34px] md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 md:-translate-x-1/2 rounded-full" />
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* Glowing Progress Line */}
-        <div 
-           className="absolute left-[33px] md:left-1/2 top-0 w-[4px] md:-translate-x-1/2 rounded-full shadow-[0_0_15px_#F27224]"
-           style={{ 
-             height: `${progress * 100}%`,
-             background: "linear-gradient(to bottom, #F27224, #0062BE)",
-             transition: "height 0.1s ease-out"
-           }}
-        />
+        {/* Header */}
+        <div className="text-center mb-20 max-w-3xl mx-auto reveal">
+          <p className="text-brand-blue text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">Proof That Good Stories Perform Better</p>
+          <h2 className="text-4xl md:text-5xl font-extrabold font-display text-[#3E2723] tracking-tight leading-[1.1] mb-6">
+            The spotlight doesn't lie.
+          </h2>
+          <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+            Behind every number is a campaign, a partnership, and a brand that trusted TeaNema to tell its story.
+          </p>
+        </div>
 
-        {/* Timeline Items */}
-        <div className="flex flex-col gap-24 md:gap-32 relative z-10">
-           {stats.map((stat, index) => {
-              const isEven = index % 2 === 0;
-              const itemThreshold = index / Math.max(1, stats.length - 1);
-              const isActive = progress >= itemThreshold - 0.05;
+        {/* 4-Column Minimal Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 lg:gap-12 relative z-10">
+          {stats.map((stat, index) => (
+            <div 
+              key={stat.id} 
+              className="group flex flex-col items-center text-center reveal cursor-default"
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              {/* Stat Value */}
+              <div className="text-5xl md:text-6xl lg:text-7xl font-black font-display tracking-tighter text-[#3E2723] mb-4 transition-transform duration-500 ease-out group-hover:scale-110">
+                <CountUp
+                  end={stat.end}
+                  decimals={stat.decimals || 0}
+                  prefix={stat.prefix || ""}
+                  suffix={stat.suffix || ""}
+                />
+              </div>
 
-              return (
-                <div key={stat.id} className={`flex flex-col md:flex-row items-center w-full ${isEven ? 'md:flex-row-reverse' : ''}`}>
-                   
-                   {/* Empty space for alternating layout on desktop */}
-                   <div className="hidden md:block md:w-1/2" />
+              {/* Expanding Colored Accent Line */}
+              <div 
+                className="h-1 w-8 rounded-full mb-6 transition-all duration-500 ease-out group-hover:w-16" 
+                style={{ backgroundColor: stat.colorHex }}
+              />
 
-                   {/* Center Node (Dot) */}
-                   <div className="absolute left-[35px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-[3px] border-[#060810] transition-all duration-500 z-20"
-                        style={{
-                           backgroundColor: isActive ? stat.colorHex : "#334155",
-                           boxShadow: isActive ? `0 0 20px ${stat.colorHex}` : 'none',
-                           transform: `translateX(-50%) scale(${isActive ? 1.5 : 1})`
-                        }}
-                   />
-
-                   {/* Content Card */}
-                   <div className={`w-full md:w-1/2 pl-20 md:pl-0 ${isEven ? 'md:pr-16 text-left md:text-right' : 'md:pl-16 text-left'}`}>
-                      <div className={`transition-all duration-700 transform ${isActive ? 'opacity-100 translate-y-0' : 'opacity-20 translate-y-8'}`}>
-                         <div className={`text-6xl md:text-7xl lg:text-8xl font-black font-display tracking-tighter leading-none mb-3 ${stat.colorClass} transition-all duration-1000`}
-                              style={{ textShadow: isActive ? `0 0 40px ${stat.colorHex}50` : 'none' }}
-                         >
-                            {isActive ? (
-                              <CountUp end={stat.end} decimals={stat.decimals || 0} prefix={stat.prefix || ""} suffix={stat.suffix || ""} duration={1200} />
-                            ) : "0"}
-                         </div>
-                         <h3 className="text-2xl md:text-3xl font-bold text-white font-display mb-2">{stat.label}</h3>
-                         <p className="text-slate-400 text-base md:text-lg">{stat.desc}</p>
-                      </div>
-                   </div>
-                </div>
-              )
-           })}
+              {/* Text Info */}
+              <h3 className="text-xl font-bold text-[#3E2723] font-display mb-3">
+                {stat.label}
+              </h3>
+              <p className="text-sm text-slate-500 font-medium leading-relaxed max-w-[200px] lg:max-w-none">
+                {stat.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -7,14 +7,14 @@ import {
   VscDeviceCameraVideo, VscArchive, VscHome, VscMegaphone, 
   VscOrganization, VscSymbolColor, VscPlayCircle, VscRecord, 
   VscMap, VscEye, VscHeart, VscGraphLine, VscCode, 
-  VscSearch, VscDeviceCamera, VscCreditCard 
+  VscSearch, VscDeviceCamera, VscCreditCard, VscLayout
 } from "react-icons/vsc";
 
 const IconMap = {
   VscDeviceCameraVideo, VscArchive, VscHome, VscMegaphone, 
   VscOrganization, VscSymbolColor, VscPlayCircle, VscRecord, 
   VscMap, VscEye, VscHeart, VscGraphLine, VscCode, 
-  VscSearch, VscDeviceCamera, VscCreditCard
+  VscSearch, VscDeviceCamera, VscCreditCard, VscLayout
 };
 
 const containerVariants = {
@@ -42,9 +42,9 @@ export default function ServicesGrid() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-black text-slate-900 mb-6"
+            className="text-4xl md:text-5xl font-black text-[#3E2723] mb-6"
           >
-            Our Expertise
+            Services That Brew Impact
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -84,7 +84,7 @@ export default function ServicesGrid() {
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-brand-blue transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-[#3E2723] mb-3 group-hover:text-brand-blue transition-colors duration-300">
                       {service.title}
                     </h3>
                     
