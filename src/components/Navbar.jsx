@@ -78,7 +78,7 @@ export default function Navbar() {
       } else if (currentScrollY < lastScrollY.current) {
         setIsScrollingDown(false); // User is scrolling up
       }
-      
+
       lastScrollY.current = currentScrollY;
     };
 
@@ -136,11 +136,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 rounded-[2rem] hover:opacity-100 ${
-        isScrolled ? "top-4 w-[95%] max-w-4xl py-2 px-3" : "top-6 w-[95%] max-w-6xl py-3 px-5"
-      } ${
-        shouldBeTransparent ? "opacity-20" : "opacity-100"
-      }`}
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 rounded-[2rem] hover:opacity-100 ${isScrolled ? "top-4 w-[95%] max-w-4xl py-2 px-3" : "top-6 w-[95%] max-w-6xl py-3 px-5"
+        } ${shouldBeTransparent ? "opacity-20" : "opacity-100"
+        }`}
       style={{
         background: "rgba(255, 255, 255, 0.70)",
         backdropFilter: "blur(24px) saturate(180%)",
@@ -228,9 +226,8 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link.href, true)}
-                    className={`text-[13px] font-semibold tracking-wide transition-all duration-300 relative py-2.5 px-6 rounded-full flex flex-col items-center justify-center min-w-[80px] focus:outline-none ${
-                      isActive ? "text-brand-blue" : "text-slate-500 hover:text-[#3E2723] nav-glass-link"
-                    }`}
+                    className={`text-[13px] font-semibold tracking-wide transition-all duration-300 relative py-2.5 px-6 rounded-full flex flex-col items-center justify-center min-w-[80px] focus:outline-none ${isActive ? "text-brand-blue" : "text-slate-500 hover:text-[#3E2723] nav-glass-link"
+                      }`}
                     style={isActive ? {
                       background: "rgba(0, 98, 190, 0.08)",
                       border: "1px solid rgba(0, 98, 190, 0.15)",
@@ -249,11 +246,10 @@ export default function Navbar() {
 
                   {/* Dropdown Menu (Light Glass) */}
                   <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 transition-all duration-200 ${
-                      isDropdownOpen
+                    className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50 transition-all duration-200 ${isDropdownOpen
                         ? "opacity-100 translate-y-0 pointer-events-auto"
                         : "opacity-0 -translate-y-2 pointer-events-none"
-                    }`}
+                      }`}
                   >
                     <div className="w-[680px] rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.08)] p-6">
                       <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
@@ -266,7 +262,7 @@ export default function Navbar() {
                           >
                             {/* Glass Background on Hover */}
                             <div className="absolute inset-0 bg-slate-50/80 border border-slate-100/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl z-0" />
-                            
+
                             {/* Glass Shine Sweep Animation */}
                             <div className="absolute inset-0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/80 to-transparent skew-x-12 z-0" />
 
@@ -291,9 +287,8 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`text-[13px] font-semibold tracking-wide transition-all duration-300 relative py-2.5 px-6 rounded-full flex flex-col items-center justify-center min-w-[80px] ${
-                  isActive ? "text-brand-blue" : "text-slate-500 hover:text-[#3E2723] nav-glass-link"
-                }`}
+                className={`text-[13px] font-semibold tracking-wide transition-all duration-300 relative py-2.5 px-6 rounded-full flex flex-col items-center justify-center min-w-[80px] ${isActive ? "text-brand-blue" : "text-slate-500 hover:text-[#3E2723] nav-glass-link"
+                  }`}
                 style={isActive ? {
                   background: "rgba(0, 98, 190, 0.08)",
                   border: "1px solid rgba(0, 98, 190, 0.15)",
@@ -343,11 +338,10 @@ export default function Navbar() {
 
       {/* Mobile Drawer (Light Mode) */}
       <div
-        className={`md:hidden absolute top-[110%] left-1/2 -translate-x-1/2 w-full rounded-[2rem] transition-all duration-300 ease-out origin-top ${
-          isMobileMenuOpen
+        className={`md:hidden absolute top-[110%] left-1/2 -translate-x-1/2 w-full rounded-[2rem] transition-all duration-300 ease-out origin-top ${isMobileMenuOpen
             ? "opacity-100 scale-y-100 pointer-events-auto"
             : "opacity-0 scale-y-95 pointer-events-none"
-        }`}
+          }`}
         style={{
           background: "rgba(255, 255, 255, 0.95)",
           backdropFilter: "blur(32px) saturate(200%)",
@@ -377,9 +371,8 @@ export default function Navbar() {
                       className="p-2"
                     >
                       <svg
-                        className={`w-5 h-5 transition-transform duration-200 ${
-                          isMobileDropdownOpen ? "rotate-180 text-brand-blue" : "text-slate-400"
-                        }`}
+                        className={`w-5 h-5 transition-transform duration-200 ${isMobileDropdownOpen ? "rotate-180 text-brand-blue" : "text-slate-400"
+                          }`}
                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -387,9 +380,8 @@ export default function Navbar() {
                     </button>
                   </div>
                   <div
-                    className={`flex flex-col gap-1.5 pl-4 border-l border-slate-100 transition-all duration-300 origin-top overflow-hidden ${
-                      isMobileDropdownOpen ? "max-h-[1200px] opacity-100 py-2" : "max-h-0 opacity-0 pointer-events-none"
-                    }`}
+                    className={`flex flex-col gap-1.5 pl-4 border-l border-slate-100 transition-all duration-300 origin-top overflow-hidden ${isMobileDropdownOpen ? "max-h-[1200px] opacity-100 py-2" : "max-h-0 opacity-0 pointer-events-none"
+                      }`}
                   >
                     {serviceItems.map((item) => (
                       <Link
@@ -416,9 +408,8 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className={`text-lg font-medium py-2 border-b border-slate-100 transition-colors flex items-center gap-3 ${
-                  isActive ? "text-brand-blue" : "text-slate-600 hover:text-[#3E2723]"
-                }`}
+                className={`text-lg font-medium py-2 border-b border-slate-100 transition-colors flex items-center gap-3 ${isActive ? "text-brand-blue" : "text-slate-600 hover:text-[#3E2723]"
+                  }`}
               >
                 {link.icon}
                 {link.name}
