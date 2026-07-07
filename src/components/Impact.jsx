@@ -112,12 +112,12 @@ export default function Impact() {
         
         {/* Header */}
         <div className="text-center mb-20 max-w-3xl mx-auto reveal">
-          <p className="text-brand-blue text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">Our Impact</p>
+          <p className="text-brand-blue text-[11px] font-extrabold uppercase tracking-[0.2em] mb-4">Proof That Good Stories Perform Better</p>
           <h2 className="text-4xl md:text-5xl font-extrabold font-display text-[#3E2723] tracking-tight leading-[1.1] mb-6">
-            Numbers That Speak Louder Than Promises.
+            The spotlight doesn't lie.
           </h2>
           <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
-            We don't deal in vanity metrics. Every campaign we run is heavily optimized for actual revenue growth and market dominance.
+            Behind every number is a campaign, a partnership, and a brand that trusted TeaNema to tell its story.
           </p>
         </div>
 

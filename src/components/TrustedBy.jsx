@@ -533,11 +533,14 @@ export default function TrustedBy() {
           }`}
         >
           <p className="text-[#F27224] text-[10px] md:text-xs font-bold uppercase tracking-[0.3em] mb-4">
-            Some of our
+            Client Section
           </p>
-          <h2 className="text-5xl md:text-7xl font-black font-display text-[#3E2723] tracking-tight">
-            CLIENTS
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-display text-[#3E2723] tracking-tight mb-6">
+            Every Frame Tells a Different Story.
           </h2>
+          <p className="text-lg text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
+            Here's a glimpse of the stories we've been fortunate enough to create together.
+          </p>
         </div>
 
         {/* Dense Grid of Cards */}
